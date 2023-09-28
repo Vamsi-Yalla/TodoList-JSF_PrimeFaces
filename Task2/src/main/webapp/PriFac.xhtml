@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>PrimeFaces</title>
+</h:head>
+<h:body>
+<h3></h3>
+  <f:view>
+<h:form id="empcont">
+   
+   <p:panelGrid cellPadding="4" columns="3">
+   
+<p:outputLabel value="ID" />
+<p:inputText value="#{empcontroller.newemployee.id}" required="true"  />
+<br/>
+
+<p:outputLabel value="ENAME" />
+<p:inputText value="#{empcontroller.newemployee.ename}" required="true"  />
+<br/>
+<p:outputLabel value="DEPARTMENT" />
+<p:inputText value="#{empcontroller.newemployee.deprt}" required="true"  />
+<br/>
+<p:outputLabel value="SALARY" />
+<p:inputText value="#{empcontroller.newemployee.sal}" required="true"  />
+<br/>
+</p:panelGrid>
+<p:commandButton value="AddDATA" action="#{empcontroller.addNew}" update="empcontForm empcont" >
+
+</p:commandButton>
+
+</h:form>
+
+
+<h:form id ="empcontForm" binding="#{empcontroller.tableForm}">
+<p:growl id="msgs" showDetail="true"/> 
+
+<div class="card">
+
+   <p:dataTable id="empData" value="#{empcontroller.employees}" var="emp" update="empcontForm" editable="true">
+
+<p:column headerText="ID">
+<h:outputText value="#{emp.id}" />
+</p:column>
+
+<p:column headerText="EName">
+<p:cellEditor>
+<f:facet name="output">
+<h:outputText value="#{emp.ename}" />
+</f:facet>
+<f:facet name="input">
+<p:inputText value="#{emp.ename}"  />
+</f:facet>
+</p:cellEditor>
+</p:column>
+
+<p:column headerText="Deprtment">
+<p:cellEditor>
+<f:facet name="output">
+<h:outputText value="#{emp.deprt}" />
+</f:facet>
+<f:facet name="input">
+<p:inputText value="#{emp.deprt}" />
+</f:facet>
+</p:cellEditor>
+</p:column>
+
+<p:column headerText="Salary">
+<p:cellEditor>
+<f:facet name="output">
+<h:outputText value="#{emp.sal}" />
+</f:facet>
+<f:facet name="input">
+<p:inputText value="#{emp.sal}"  />
+</f:facet>
+</p:cellEditor>
+</p:column>
+ 
+
+            
+ 
+
+
+
+
+
+</p:dataTable>
+</div>
+</h:form> 
+</f:view>           
+</h:body>
+</html>

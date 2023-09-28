@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Employee</title>
+</head>
+<body>
+	<h3>Employee Data List</h3>
+	
+
+	<h:form>	
+	<h:outputText value="ID"></h:outputText>
+	<h:inputText value="#{empcontroller.newemployee.id}" required="true"/>
+	<br/>
+	
+	<h:outputText value="EmployeeName"></h:outputText>
+	<h:inputText value="#{empcontroller.newemployee.ename}" required="true"/>
+		<br/>
+		
+	<h:outputText value="Department"></h:outputText>
+	<h:inputText value="#{empcontroller.newemployee.deprt}" required="true"/>
+	
+	<br/>
+	
+	<h:outputText value="Salary"></h:outputText>
+	<h:inputText value="#{empcontroller.newemployee.sal}" required="true"/> 
+	<br/>
+	<h:commandButton value="AddData" action="#{empcontroller.addNew}"></h:commandButton>
+	</h:form>
+	
+ <h:form>
+<h:dataTable  id="employeedata" value="#{empcontroller.employees}" var="emp" editable="true" border="1">
+
+<h:column>
+<f:facet name="header">ID</f:facet>
+<h:outputText value="#{emp.id}" editable="false"> </h:outputText>
+</h:column>
+
+<h:column>
+<f:facet name="header">EName</f:facet>
+<h:inputText value="#{emp.ename}" rendered="#{emp.edit}" />
+<h:outputText value="#{emp.ename}" rendered="#{not emp.edit}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">Deprt</f:facet>
+<h:inputText value="#{emp.deprt}" rendered="#{emp.edit}" />
+<h:outputText value="#{emp.deprt}" rendered="#{not emp.edit}"/>
+</h:column>
+
+<h:column>
+<f:facet name="header">Salary</f:facet>
+<h:inputText value="#{emp.sal}" rendered="#{emp.edit}" />
+<h:outputText value="#{emp.sal}" rendered="#{not emp.edit}"/>
+</h:column>
+
+<h:column>
+<f:facet name="header">Delete </f:facet>
+<h:commandLink value="Delete" action="#{empcontroller.delete}">
+<f:setPropertyActionListener target="#{empcontroller.employee}" value="#{emp}" />
+</h:commandLink>    
+</h:column>
+
+
+<h:column>
+<f:facet name="header">Edit  </f:facet>
+<h:commandLink value="Edit" action="#{empcontroller.edit}">
+<f:setPropertyActionListener target="#{empcontroller.employee}" value="#{emp}" />
+</h:commandLink>
+</h:column>
+
+<h:column>
+<f:facet name="header">Save </f:facet>
+<h:commandLink value="Save" action="#{empcontroller.editSave}">
+<f:setPropertyActionListener target="#{empcontroller.employee}" value="#{emp}" />
+</h:commandLink>
+</h:column>
+
+<h:column>
+<f:facet name="header">Reset </f:facet>
+<h:commandLink value="Reset" action="#{empcontroller.editReset}">
+<f:setPropertyActionListener target="#{empcontroller.employee}" value="#{emp}" />
+</h:commandLink>
+</h:column>
+
+
+
+</h:dataTable>
+</h:form>
+		
+	
+</body>
+</html>

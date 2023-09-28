@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>SchoolData</title>
+</head>
+<body>
+	<h3>Employee Data List</h3>
+	<f:view>
+	<h:form binding="#{empcontroller.form}">
+
+	<h:outputText value="ID"></h:outputText>
+	<h:inputText value="#{empcontroller.employee.id}" />
+	<br/>
+	<h:outputText value="EmployeeName"></h:outputText>
+	<h:inputText value="#{empcontroller.employee.ename}" />
+		<br/>
+		
+	<h:outputText value="Department"></h:outputText>
+	<h:inputText value="#{empcontroller.employee.deprt}" />
+	
+	<br/>
+	
+	<h:outputText value="Salary"></h:outputText>
+	<h:inputText value="#{empcontroller.employee.sal}" /> 
+	<br/>
+	 
+<h:commandButton value="Save" action="#{empcontroller.updateEmployee1}"></h:commandButton> 
+<h:commandButton value="GoTO Home" action="emp"></h:commandButton>
+	</h:form>
+</f:view>
+</body>
+
+
+
+
+</html>

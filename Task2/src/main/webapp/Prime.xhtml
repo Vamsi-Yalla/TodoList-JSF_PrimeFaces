@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Employee List</title>
+	
+    <!-- Include PrimeFaces theme CSS -->
+    <link rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/theme.css.xhtml?ln=primefaces-nova-light" />
+
+</h:head>
+<h:body>
+	<h3>Double Click for Employee Editing</h3>
+
+	<h:form id="empform">
+    
+    <p:panelGrid columns="3" cellPadding="5">
+
+		<p:outputLabel value="ENAME" />
+		<p:inputText value="#{emprime.newemployee.ename}" required="true" />
+		<br />
+		<p:outputLabel value="DEPRT" />
+		<p:inputText value="#{emprime.newemployee.deprt}" required="true" />
+		<br />
+		<p:outputLabel value="SALARY" />
+		<p:inputText value="#{emprime.newemployee.sal}" required="true" />
+		<br />
+		</p:panelGrid>
+		<p:commandButton value="Add" action="#{emprime.addNew}" update="udata empform">
+
+		</p:commandButton>
+<br/>
+<br/>
+<br/>
+	</h:form>
+
+
+	<h:form id="udata">
+
+<p:growl id="msg" showDetail="true" />
+
+		<p:dataTable id="DataTab" value="#{emprime.lazyemployees}" var="emp1" editable="true" editMode="cell"
+                     widgetVar="cellEmployee" editInitEvent="dblclick" paginator="true" rows="10" lazy="true" 
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+           currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"  rowsPerPageTemplate="10,25,50,100,150"     >
+
+<p:ajax event="cellEdit" listener="#{emprime.onCellEdit}" update=":udata:msg" />   
+
+			<p:column headerText="ID" sortBy="#{emp1.id}" filterBy="#{emp1.id}" filterMatchMode="contains">
+				<h:outputText value="#{emp1.id}" />
+			</p:column>
+
+			<p:column headerText="EName" sortBy="#{emp1.ename}" filterBy="#{emp1.ename}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp1.ename}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp1.ename}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="DEPART" sortBy="#{emp1.deprt}" filterBy="#{emp1.deprt}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp1.deprt}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp1.deprt}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="SALARY" sortBy="#{emp1.sal}" filterBy="#{emp1.sal}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp1.sal}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp1.sal}" />
+					</f:facet>
+				</p:cellEditor> 
+			</p:column>	
+			
+			<p:column headerText="DELETE">
+		<p:commandButton value="Delete" action="#{emprime.delete}" update="udata" process="@this">
+		<f:setPropertyActionListener target="#{emprime.employee}" value="#{emp1}" />
+		</p:commandButton>
+			</p:column>
+			
+			<p:contextMenu for="employees2" widgetVar="cMenu">
+        <p:menuitem value="Edit Cell" icon="pi pi-search"
+                    onclick="PF('cellEmployees').showCellEditor();return false;"/>
+        
+    </p:contextMenu>
+
+
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
